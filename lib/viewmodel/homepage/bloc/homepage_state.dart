@@ -37,3 +37,32 @@ class AddTaskFailed extends HomepageState {
   final String message;
   AddTaskFailed(this.message);
 }
+
+
+
+//------------------update task related
+class EditTaskLoading extends HomepageState{
+}
+
+class EditTaskSuccess extends HomepageState{
+}
+
+class EditTaskFailed extends HomepageState{ 
+  final String message;
+  EditTaskFailed(this.message);
+}
+
+
+
+
+//------------------delete task related
+class DeleteTaskLoading extends HomepageState{
+}
+
+class DeleteTaskSuccess extends HomepageState{
+}
+
+class DeleteTaskFailed extends HomepageState{ 
+  final String message;
+  DeleteTaskFailed(this.message);
+}

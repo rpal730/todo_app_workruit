@@ -37,6 +37,7 @@ class DatabaseClient {
           .set({
         TasksSchema.title: title,
         TasksSchema.description: description,
+        TasksSchema.createdAt : DateTime.now()
       });
     } catch (e) {
       print(e.toString());
@@ -56,7 +57,7 @@ class DatabaseClient {
           .doc(uid)
           .collection(DatabaseCollections.tasks)
           .doc(taskId)
-          .set({
+          .update({
         TasksSchema.title: title,
         TasksSchema.description: description,
       });
@@ -73,7 +74,7 @@ class DatabaseClient {
       var doc = await FirebaseFirestore.instance
           .collection(DatabaseCollections.users)
           .doc(uid)
-          .collection(DatabaseCollections.tasks)
+          .collection(DatabaseCollections.tasks).orderBy(TasksSchema.createdAt, descending: true)
           .get();
 
       print(doc);
@@ -94,6 +95,23 @@ class DatabaseClient {
     } catch (e) {
       print(e.toString());
       return [];
+    }
+  }
+
+  
+//-------to delete task
+
+  Future<void> deleteTask(
+      {required String uid,
+      required String taskId}) async {
+    try {
+      FirebaseFirestore.instance
+          .collection(DatabaseCollections.users)
+          .doc(uid)
+          .collection(DatabaseCollections.tasks)
+          .doc(taskId).delete();
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

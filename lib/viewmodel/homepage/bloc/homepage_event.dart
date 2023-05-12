@@ -12,3 +12,14 @@ class AddTaskEvent extends HomepageEvent {
 }
 
 class FetchTaskEvent extends HomepageEvent {}
+class DeleteTaskEvent extends HomepageEvent {
+  final String taskId;
+  DeleteTaskEvent({required this.taskId});
+}
+
+class EditTaskEvent extends HomepageEvent {
+  final String title;
+  final String taskId;
+  final String? description;
+  EditTaskEvent({required this.title, this.description, required this.taskId});
+}

@@ -11,4 +11,5 @@ class UsersSchema {
 class TasksSchema {
   static const String title = 'title';
   static const String description = 'description';
+  static const String createdAt = 'created_at';
 }

@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(create: (context) => LoginBloc()),
           ],
           child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             theme: ThemeData.dark(),
             routerConfig: GoRouter(
                 initialLocation: (widget.rememberMe &&

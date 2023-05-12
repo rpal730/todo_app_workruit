@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app_workruit/view/add_task/add_task.dart';
+import 'package:todo_app_workruit/view/edit_task/edit_task.dart';
 import 'package:todo_app_workruit/view/homepage/homepage.dart';
 import 'package:todo_app_workruit/view/landing_page/landing_page.dart';
 import 'package:todo_app_workruit/view/login_page/login_page.dart';
@@ -31,5 +31,13 @@ final routes = [
     name: AddTask.routeName,
     path: AddTask.routeName,
     builder: (context, state) => const AddTask(),
+  ),
+  GoRoute(
+    name: EditTask.routeName,
+    path: '${EditTask.routeName}/:taskId/:title/:description',
+    builder: (context, state) => EditTask(
+        title: state.pathParameters['title'] ?? '',
+        description: state.pathParameters['description'] ?? '',
+        taskId: state.pathParameters['taskId'] ?? ''),
   ),
 ];

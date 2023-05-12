@@ -69,7 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               const SizedBox.square(dimension: 30),
-              Text(
+              const Text(
                 'SignUp.',
                 style: TextStyle(fontSize: 50),
               ),

@@ -13,12 +13,12 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.grey.shade300,
-          boxShadow: [BoxShadow(color: Colors.black)]),
+          boxShadow: const [BoxShadow(color: Colors.black)]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,7 +29,7 @@ class TaskCard extends StatelessWidget {
                 onPressed: onPressed,
                 icon: const Icon(
                   Icons.edit,
-                  color: Colors.red,
+                  color: Colors.amber,
                 ))
           ],
         ),

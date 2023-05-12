@@ -28,4 +28,20 @@ class UserRepository {
       uid: userId,
     );
   }
+  //-------------editing task
+  Future<void> editTask({
+    required String userId,required String taskId,required String title,String? description
+  }) async {
+    return await DatabaseClient.provider.editTask(
+      uid: userId,taskId: taskId,title: title,description: description
+    );
+  }
+  //-------------deleting task
+  Future<void> deleteTask({
+    required String userId,required String taskId,
+  }) async {
+    return await DatabaseClient.provider.deleteTask(
+      uid: userId,taskId: taskId,
+    );
+  }
 }

@@ -81,7 +81,7 @@ class CustomTextField extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               if (subtitle != null) ...[
-                SizedBox.square(
+                const SizedBox.square(
                   dimension: 5,
                 ),
                 Text(
@@ -92,11 +92,11 @@ class CustomTextField extends StatelessWidget {
               ],
             ],
           ),
-          SizedBox.square(
+          const SizedBox.square(
             dimension: 5,
           ),
           Flexible(
-            child: Container(
+            child: SizedBox(
               height: height,
               width: width,
               child: TextFormField(
