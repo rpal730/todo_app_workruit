@@ -4,15 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app_workruit/config/app_router.dart';
 import 'package:todo_app_workruit/repositories/user_repository.dart';
+import 'package:todo_app_workruit/viewmodel/login/bloc/login_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final prefs = await SharedPreferences.getInstance();
   final rememberMe = prefs.getBool('rememberMe') ?? false;
+  print('-----ssf-------');
   runApp(MyApp(
     rememberMe: rememberMe,
   ));
+
+  print('-----sadsa--------');
 }
 
 class MyApp extends StatefulWidget {
@@ -26,10 +30,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    print('-----sadsadas------');
     return MultiRepositoryProvider(
-        providers: [RepositoryProvider(create: (context) => UserRepository())],
+        providers: [RepositoryProvider(create: (context) => UserRepository(),),],
         child: MultiBlocProvider(
-          providers: [],
+          providers:  [
+          BlocProvider(create: (context) => LoginBloc()),],
           child: MaterialApp.router(
             routerConfig: router,
           ),
