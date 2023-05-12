@@ -23,7 +23,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void _listenLoginBloc(BuildContext context, LoginState state) {
     if (state is LoginSuccess) {
-      context.pushReplacementNamed(Homepage.routeName);
+      context.goNamed(Homepage.routeName);
+      // context.pushReplacementNamed(Homepage.routeName);
       showSuccessSnackbar(context, 'Successfully Logged in !!');
     } else if (state is LoginFailed) {
       showErrorSnackbar(context, state.message);
