@@ -37,6 +37,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     } on CustomException catch (e) {
       emit(SignupFailed(e.toString()));
     } on Exception catch (e) {
+      print(e.toString());
       emit(SignupFailed('Something went wrong'));
     }
   }

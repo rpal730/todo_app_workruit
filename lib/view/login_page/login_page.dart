@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_app_workruit/utils/ui_helper.dart';
 import 'package:todo_app_workruit/view/custom_widgets/custom_processing_button.dart';
 import 'package:todo_app_workruit/view/custom_widgets/custom_textfield.dart';
+import 'package:todo_app_workruit/view/homepage/homepage.dart';
+import 'package:todo_app_workruit/viewmodel/login/bloc/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -12,8 +16,35 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late final LoginBloc _bloc;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool rememberMe = false;
+
+  void _listenLoginBloc(BuildContext context, LoginState state) {
+    if (state is LoginSuccess) {
+      context.pushReplacementNamed(Homepage.routeName);
+      showSuccessSnackbar(context, 'Successfully Logged in !!');
+    } else if (state is LoginFailed) {
+      showErrorSnackbar(context, state.message);
+    }
+  }
+
+  void _performSignin() {
+    _bloc.add(
+      LoginProcessing(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+        rememberMe: rememberMe,
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    _bloc = LoginBloc();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +55,9 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              //--------------------------
               const SizedBox.square(dimension: 30),
-              Text(
+              const Text(
                 'Login.',
                 style: TextStyle(fontSize: 50),
               ),
@@ -41,7 +73,19 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
                 title: 'Password',
               ),
-              SizedBox.square(dimension: 10),
+              Row(
+                children: [
+                  //-------------------check box
+                  Checkbox(
+                      value: rememberMe,
+                      onChanged: (value) {
+                        rememberMe = value ?? false;
+                        setState(() {});
+                      }),
+                  const Text('Remember me'),
+                ],
+              ),
+              const SizedBox.square(dimension: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -54,10 +98,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox.square(dimension: 10),
                   Flexible(
-                      child: CustomProcessingButton(
+                    child: BlocConsumer<LoginBloc, LoginState>(
+                      bloc: _bloc,
+                      listener: _listenLoginBloc,
+                      builder: (context, state) {
+                        return CustomProcessingButton(
+                          isProcessing: state is LoginLoading,
                           backgroundColor: Colors.blueGrey,
-                          onPressed: () {},
-                          title: ('SUBMIT')))
+                          onPressed: _performSignin,
+                          title: ('SUBMIT'),
+                        );
+                      },
+                    ),
+                  )
                 ],
               )
             ],

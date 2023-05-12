@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox.square(dimension: 10),
               CustomTextField(
                 controller: confirmPasswordController,
-                hint: 'Confirm password',
+                hint: 'Re-enter password',
                 title: 'Confirm Password',
                 obscureText: true,
               ),

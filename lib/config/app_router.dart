@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_app_workruit/view/add_task/add_task.dart';
 import 'package:todo_app_workruit/view/homepage/homepage.dart';
 import 'package:todo_app_workruit/view/landing_page/landing_page.dart';
 import 'package:todo_app_workruit/view/login_page/login_page.dart';
@@ -25,5 +26,10 @@ final routes = [
     name: Homepage.routeName,
     path: Homepage.routeName,
     builder: (context, state) => const Homepage(),
+  ),
+  GoRoute(
+    name: AddTask.routeName,
+    path: AddTask.routeName,
+    builder: (context, state) => const AddTask(),
   ),
 ];

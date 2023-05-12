@@ -25,7 +25,7 @@ class CustomProcessingButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             elevation: 0,
             backgroundColor: isProcessing
-                ? (onProcessingBackgroundColor ?? Colors.white)
+                ? (onProcessingBackgroundColor ?? Colors.lightGreen)
                 : (backgroundColor ?? Colors.white),
             padding: const EdgeInsets.all(10),
             minimumSize: const Size.fromHeight(50),
