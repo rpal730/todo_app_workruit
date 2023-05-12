@@ -20,7 +20,11 @@ class _LandingPageState extends State<LandingPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(onPressed: () {context.pushNamed(LoginPage.routeName);}, child: const Text('Login')),
+              ElevatedButton(
+                  onPressed: () {
+                    context.pushNamed(LoginPage.routeName);
+                  },
+                  child: const Text('Login')),
               ElevatedButton(
                   onPressed: () {
                     context.pushNamed(SignUpPage.routeName);

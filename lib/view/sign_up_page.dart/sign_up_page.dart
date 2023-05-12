@@ -63,60 +63,73 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomTextField(
-            controller: nameController,
-            hint: 'Enter name',
-          ),
-          CustomTextField(
-            controller: emailController,
-            hint: 'Enter email',
-          ),
-          CustomTextField(
-            controller: passwordController,
-            hint: 'Enter password',
-            obscureText: true,
-          ),
-          CustomTextField(
-            controller: confirmPasswordController,
-            hint: 'Confirm password',
-            obscureText: true,
-          ),
-          const SizedBox.square(
-            dimension: 10,
-          ),
-          Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Flexible(
-                  child: CustomProcessingButton(
-                    title: 'Back',
-                    onPressed: () {
-                      context.pop();
-                    },
+            children: [
+              const SizedBox.square(dimension: 30),
+              Text(
+                'SignUp.',
+                style: TextStyle(fontSize: 50),
+              ),
+              CustomTextField(
+                controller: nameController,
+                hint: 'Enter name',
+                title: 'Name',
+              ),
+              const SizedBox.square(dimension: 10),
+              CustomTextField(
+                controller: emailController,
+                hint: 'Enter email',
+                title: 'Email-id',
+              ),
+              const SizedBox.square(dimension: 10),
+              CustomTextField(
+                controller: passwordController,
+                hint: 'Enter password',
+                title: 'Password',
+                obscureText: true,
+              ),
+              const SizedBox.square(dimension: 10),
+              CustomTextField(
+                controller: confirmPasswordController,
+                hint: 'Confirm password',
+                title: 'Confirm Password',
+                obscureText: true,
+              ),
+              const SizedBox.square(dimension: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    child: CustomProcessingButton(
+                      title: 'Back',
+                      onPressed: () {
+                        context.pop();
+                      },
+                    ),
                   ),
-                ),
-                BlocConsumer<SignupBloc, SignupState>(
-                  bloc: _bloc,
-                  listener: _listenSignupBloc,
-                  builder: (context, state) {
-                    return Flexible(
-                      child: CustomProcessingButton(
-                        onPressed: _performSignin,
-                        title: 'SUBMIT',
-                        backgroundColor: Colors.blueGrey,
-                        isProcessing: state is SignupLoading,
-                      ),
-                    );
-                  },
-                )
-              ],
-            ),
-          )
-        ],
+                  const SizedBox.square(dimension: 10),
+                  BlocConsumer<SignupBloc, SignupState>(
+                    bloc: _bloc,
+                    listener: _listenSignupBloc,
+                    builder: (context, state) {
+                      return Flexible(
+                        child: CustomProcessingButton(
+                          onPressed: _performSignin,
+                          title: 'SUBMIT',
+                          backgroundColor: Colors.blueGrey,
+                          isProcessing: state is SignupLoading,
+                        ),
+                      );
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
       )),
     );
   }

@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_app_workruit/view/homepage/homepage.dart';
 import 'package:todo_app_workruit/view/landing_page/landing_page.dart';
 import 'package:todo_app_workruit/view/login_page/login_page.dart';
 import 'package:todo_app_workruit/view/sign_up_page.dart/sign_up_page.dart';
 
-final GoRouter router =
-    GoRouter(initialLocation: LandingPage.routeName, routes: [
+final routes = [
   GoRoute(
     name: LandingPage.routeName,
     path: LandingPage.routeName,
@@ -20,4 +21,9 @@ final GoRouter router =
     path: LoginPage.routeName,
     builder: (context, state) => const LoginPage(),
   ),
-]);
+  GoRoute(
+    name: Homepage.routeName,
+    path: Homepage.routeName,
+    builder: (context, state) => const Homepage(),
+  ),
+];

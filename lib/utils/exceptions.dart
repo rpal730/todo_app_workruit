@@ -1,12 +1,8 @@
 class CustomException implements Exception {
+  final String message, details;
 
-	final String message, details;
+  const CustomException({this.message = '', this.details = ''});
 
-	const CustomException({
-		this.message = '',
-		this.details = ''
-	});
-
-	@override
+  @override
   String toString() => '$runtimeType: $message\n$details';
 }
