@@ -12,7 +12,8 @@ class EditTask extends StatefulWidget {
   final String title;
   final String? description;
   final String taskId;
-  const EditTask({super.key, required this.title, this.description, required this.taskId});
+  const EditTask(
+      {super.key, required this.title, this.description, required this.taskId});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -25,7 +26,12 @@ class _EditTaskState extends State<EditTask> {
   bool rememberMe = false;
 
   void _listenHomepageBloc(BuildContext context, HomepageState state) {
-    if (state is EditTaskSuccess) {
+    //i know i know switch case lagana tha and also i m very tired
+    if (state is DeleteTaskSuccess) {
+      context.pop(true);
+    } else if (state is DeleteTaskFailed) {
+      showErrorSnackbar(context, 'Failed to delete');
+    } else if (state is EditTaskSuccess) {
       context.pop(true);
       showSuccessSnackbar(context, 'Successfully Updated');
     } else if (state is EditTaskFailed) {
@@ -33,15 +39,27 @@ class _EditTaskState extends State<EditTask> {
     }
   }
 
+  void _deleteTask() {
+    print('-----trying to edit');
+    _bloc.add(
+      DeleteTaskEvent(
+        taskId: widget.taskId,
+      ),
+    );
+
+    print('-----trying to delete');
+  }
+
   void _addTask() {
     print('-----trying to edit');
     _bloc.add(
-      EditTaskEvent(taskId: widget.taskId,
+      EditTaskEvent(
+        taskId: widget.taskId,
         title: titleController.text.trim(),
         description: descriptionController.text.trim(),
       ),
     );
-    
+
     print('-----trying to update');
   }
 
@@ -49,14 +67,14 @@ class _EditTaskState extends State<EditTask> {
   void initState() {
     _bloc = HomepageBloc(context.read<UserRepository>());
     titleController.text = widget.title;
-    if(widget.description!='') {
+    if (widget.description != '') {
       descriptionController.text = widget.description ?? '';
     }
-print('---------------title');
+    print('---------------title');
     print(widget.title);
-print('---------------id');
+    print('---------------id');
     print(widget.taskId);
-print('---------------description');
+    print('---------------description');
     print(widget.description);
     super.initState();
   }
@@ -115,7 +133,13 @@ print('---------------description');
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox.square(dimension: 20,),
+              CustomProcessingButton(backgroundColor: Colors.redAccent,
+                  onPressed: () {
+                    _deleteTask();
+                  },
+                  title: 'DELETE'),
             ],
           ),
         ),
